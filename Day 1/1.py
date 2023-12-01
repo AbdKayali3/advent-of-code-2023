@@ -46,11 +46,10 @@ def init():
             print("empty line")
         else:
             # get the calibration value from the line by looping through the line and get the numbers
-            for char, i in line:
+            for char in line:
                 if char.isdigit():
                     numbers += char
             adding += int(numbers[0] + numbers[-1])
-            print(i)
 
 
     print("sum: " + str(adding))
