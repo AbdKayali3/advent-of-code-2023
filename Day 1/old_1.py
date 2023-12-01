@@ -7,7 +7,7 @@
 # 1. read the file
 # 2. loop through the lines
 # 3. filter the lines that are empty
-# 4. loop though the line and get only the numbers
+# 4. filter each line to get only the numbers
 # 5. sum the numbers
 
 import os
@@ -36,8 +36,6 @@ def init():
     # looping through all lines
     for line in lines:
 
-        numbers = ""
-
         # remove the new line character
         line = line.rstrip()
 
@@ -45,19 +43,32 @@ def init():
         if line.strip() == "":
             print("empty line")
         else:
-            # get the calibration value from the line by looping through the line and get the numbers
-            for char, i in line:
-                if char.isdigit():
-                    numbers += char
-            adding += int(numbers[0] + numbers[-1])
-            print(i)
-
+            # get the calibration value from the line
+            value = getCalibrationValue(line)
+            adding = adding + value
 
     print("sum: " + str(adding))
     
     f.close()
 
     printables("End", 1)
+
+
+def getCalibrationValue(line):
+    # filter the line to get only the numbers
+    line = line.translate(str.maketrans('', '', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'))
+
+    # count the characters in the line
+    print(line)
+
+    # get the first and last number add them beside each other
+    calibration = line[0] + line[-1]
+
+    print(calibration + "\n")
+
+    # convert the string to int
+    calibration = int(calibration)
+    return calibration
 
 
 def printables(str, type = 1):
